@@ -3,9 +3,19 @@ import { ArrowRightIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { lusitana } from '@/app/ui/fonts';
 import Image from 'next/image';
+import { fetchRevenue, fetchLatestInvoices, fetchCardData } from '@/app/lib/data';
 
 
-export default function Page() {
+export default async function Page() {
+    const latestInvoices = await fetchLatestInvoices();
+    const revenue = await fetchRevenue();
+      const {
+    numberOfInvoices,
+    numberOfCustomers,
+    totalPaidInvoices,
+    totalPendingInvoices,
+  } = await fetchCardData();
+
   return (
     <main className="flex min-h-screen flex-col p-6">
       <div className={`${lusitana.className} text-xl text-gray-800 md:text-3xl md:leading-normal`}>
